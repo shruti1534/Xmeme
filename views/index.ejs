@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <title>XMeme</title>
+    <link rel="icon" href="http://example.com/favicon.png">
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        #zoom:hover {
+            cursor: zoom-in;
+            -ms-transform: scale(1.5); 
+            -webkit-transform: scale(1.5);
+            transform: scale(2); 
+        }
+    </style>
+    <link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/39/PNG/128/x_5982.png">
+</head>
+<body>
+    <div class="container mt-4 mx-auto bg-light text-center text-dark" >
+        <h1 style="font-family:Palatino Linotype; text-shadow: 2px 2px 4px #8f8989; font-size:300%;"><b>Meme Stream</b></h1>
+        <a href="/addmeme" class="btn btn-success mt-2 mb-4">Add New Meme</a>
+        <div class="card-columns">
+        <% memes.forEach(meme => {%>
+            <div class="card mt-2">
+                <div class="card-body border border-info" style="border-radius: 2%;">
+                    <h6 class="card-title text-left mb-0">
+                        <%= meme.name %>
+                    </h6>
+                    <p class="text-muted text-left" style="font-size: smaller; font-style: italic;">
+                        <%= meme.createdAt.toLocaleTimeString('en-US', {hour: 'numeric',minute: 'numeric',hour12: true}) %>
+                    </p>
+                    <h6 class="card-subtitle text-left mb-2" style="font-family: cursive; font-size: small;">
+                        <%= meme.caption %>
+                    </h6>
+                    
+                    <picture>
+                        <img src="<%= meme.memeURL %>" class="img-thumbnail" alt="...">
+                    </picture>
+
+                    <div class="mt-2">
+                        <form action="/meme/<%= meme.id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <%}) %>
+        </div>
+    </div>
+
+</body>
+</html>
